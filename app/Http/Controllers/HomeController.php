@@ -42,6 +42,23 @@ class HomeController extends Controller
         }
         return view('frontend.sanpham', compact('title', 'sanpham'));
     }
+    public function getPhanHang($tenhang_slug = '')
+    {
+        // Bổ sung code tại đây
+        if (empty($tenhang_slug)) {
+            $title = 'Hãng Sản Xuất';
+            $sanpham = SanPham::orderBy('created_at', 'desc')
+                ->paginate(20);
+        } else {
+            $hangsanxuat = HangSanXuat::where('tenhang_slug', $tenhang_slug)
+                ->firstOrFail();
+            $title = $hangsanxuat->tenhang;
+            $sanpham = SanPham::where('hangsanxuat_id', $hangsanxuat->id)
+                ->orderBy('created_at', 'desc')
+                ->paginate(20);
+        }
+        return view('frontend.sanpham', compact('title', 'sanpham'));
+    }
 
     public function postTimKiem(Request $request)
     {
@@ -219,21 +236,5 @@ class HomeController extends Controller
             return redirect()->route('user.home');
         }
     }
-    public function getPhanHang($tenhang_slug = '')
-    {
-        // Bổ sung code tại đây
-        if (empty($tenhang_slug)) {
-            $title = 'Hãng Sản Xuất';
-            $sanpham = SanPham::orderBy('created_at', 'desc')
-                ->paginate(20);
-        } else {
-            $hangsanxuat = HangSanXuat::where('tenhang_slug', $tenhang_slug)
-                ->firstOrFail();
-            $title = $hangsanxuat->tenhang;
-            $sanpham = SanPham::where('hangsanxuat_id', $hangsanxuat->id)
-                ->orderBy('created_at', 'desc')
-                ->paginate(20);
-        }
-        return view('frontend.phanhang', compact('title', 'sanpham'));
-    }
+
 }

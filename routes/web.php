@@ -36,9 +36,9 @@ Route::name('frontend.')->group(function () {
     Route::get('/home', [HomeController::class, 'getHome'])->name('home');
     // Trang sản phẩm
     Route::get('/san-pham', [HomeController::class, 'getSanPham'])->name('sanpham');
-    Route::get('/san-pham/{tenloai_slug}', [HomeController::class, 'getSanPham'])->name('sanpham.phanloai');
+    Route::get('/san-pham/loai-{tenloai_slug}', [HomeController::class, 'getSanPham'])->name('sanpham.phanloai');
     Route::get('/san-pham/{tenloai_slug}/{tensanpham_slug}', [HomeController::class, 'getSanPham_ChiTiet'])->name('sanpham.chitiet');
-    Route::get('/san-pham/{tenhang_slug}', [HomeController::class, 'getPhanHang'])->name('phanhang');
+    Route::get('/san-pham/hang-{tenhang_slug}', [HomeController::class, 'getPhanHang'])->name('sanpham.phanhang');
     //Tìm Kiếm
     Route::post('/tim-kiem', [HomeController::class, 'postTimKiem'])->name('timkiem');
     // Tin tức
