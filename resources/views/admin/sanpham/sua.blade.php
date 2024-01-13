@@ -61,6 +61,21 @@
                 @enderror
             </div>
             <div class="mb-3">
+                <label class="form-label" for="hinhanhmota">Hình ảnh mô tả sản phẩm</label>
+                @if($dshinhanh->isNotEmpty())
+                <div class="d-flex">
+                    @foreach($dshinhanh as $value)
+                    <img class="d-block rounded img-thumbnail mx-2" src="{{ env('APP_URL') . '/storage/app/' . $value->hinhanhmota }}" width="100" />
+                    @endforeach
+                </div>
+                <span class="d-block small text-danger">Bỏ trống nếu muốn giữ nguyên ảnh cũ.</span>
+                @endif
+                <input type="file" class="form-control @error('hinhanhmota') is-invalid @enderror" id="hinhanhmota" name="hinhanhmota[]" value="{{ $value->hinhanhmota }}" multiple />
+                @error('hinhanhmota')
+                <div class="invalid-feedback"><strong>{{ $message }}</strong></div>
+                @enderror
+            </div>
+            <div class="mb-3">
                 <label class="form-label" for="motasanpham">Mô tả sản phẩm</label>
                 <textarea class="form-control" id="motasanpham" name="motasanpham">{{ $sanpham->motasanpham }}</textarea>
             </div>

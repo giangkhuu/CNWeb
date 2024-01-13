@@ -57,6 +57,13 @@
                 @enderror
             </div>
             <div class="mb-3">
+                <label class="form-label" for="hinhanhmota">Hình ảnh mô tả sản phẩm</label>
+                <input type="file" class="form-control @error('hinhanhmota') is-invalid @enderror" id="hinhanhmota" name="hinhanhmota[]" value="{{ old('hinhanhmota') }}" multiple />
+                @error('hinhanhmota')
+                <div class="invalid-feedback"><strong>{{ $message }}</strong></div>
+                @enderror
+            </div>
+            <div class="mb-3">
                 <label class="form-label" for="motasanpham">Mô tả sản phẩm</label>
                 <textarea class="form-control" id="motasanpham" name="motasanpham">{{ old('motasanpham') }}</textarea>
             </div>
